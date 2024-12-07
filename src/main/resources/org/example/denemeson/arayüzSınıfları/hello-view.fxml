@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane layoutX="-2.0" layoutY="171.0" prefHeight="563.0" prefWidth="390.0" styleClass="left-form" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane layoutX="-2.0" layoutY="171.0" prefHeight="563.0" prefWidth="390.0" styleClass="left-form" stylesheets="@../loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label layoutX="141.0" layoutY="268.0" text="Super Market" textFill="WHITE">
                      <font>
@@ -22,40 +22,40 @@
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="admin_form" layoutX="382.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@loginDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="admin_form" layoutX="382.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@../loginDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="133.0" layoutY="173.0" stylesheets="@loginDesign.css" text="Admin Sign In" textFill="#060c63">
+                  <Label layoutX="133.0" layoutY="173.0" stylesheets="@../loginDesign.css" text="Admin Sign In" textFill="#060c63">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="admin_username" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <PasswordField fx:id="admin_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <Button fx:id="admin_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
-                  <Hyperlink fx:id="admin_hyperlink" layoutX="117.0" layoutY="496.0" onAction="#switchForm" stylesheets="@loginDesign.css" text="Login Employee Account?">
+                  <TextField fx:id="admin_username" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" stylesheets="@../loginDesign.css" />
+                  <PasswordField fx:id="admin_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@../loginDesign.css" />
+                  <Button fx:id="admin_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../loginDesign.css" text="Login" />
+                  <Hyperlink fx:id="admin_hyperlink" layoutX="117.0" layoutY="496.0" onAction="#switchForm" stylesheets="@../loginDesign.css" text="Login Employee Account?">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@loginDesign.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../loginDesign.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="employee_form" layoutX="399.0" layoutY="10.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="employee_form" layoutX="399.0" layoutY="10.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@../loginDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="119.0" layoutY="173.0" stylesheets="@loginDesign.css" text="Employee Sign In" textFill="#060c63">
+                  <Label layoutX="119.0" layoutY="173.0" stylesheets="@../loginDesign.css" text="Employee Sign In" textFill="#060c63">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="employee_ID" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Epmloyee ID" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <PasswordField fx:id="employee_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <Button fx:id="employee_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
-                  <Hyperlink fx:id="employee_hyperLink" layoutX="125.0" layoutY="498.0" onAction="#switchForm" stylesheets="@loginDesign.css" text="Login Admin Account">
+                  <TextField fx:id="employee_ID" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Epmloyee ID" styleClass="text-field" stylesheets="@../loginDesign.css" />
+                  <PasswordField fx:id="employee_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@../loginDesign.css" />
+                  <Button fx:id="employee_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../loginDesign.css" text="Login" />
+                  <Hyperlink fx:id="employee_hyperLink" layoutX="125.0" layoutY="498.0" onAction="#switchForm" stylesheets="@../loginDesign.css" text="Login Admin Account">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Hyperlink>
-                  <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@loginDesign.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../loginDesign.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
                </children>
             </AnchorPane>
          </children>
