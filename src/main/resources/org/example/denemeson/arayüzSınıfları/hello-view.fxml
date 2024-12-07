@@ -31,7 +31,7 @@
                   </Label>
                   <TextField fx:id="admin_username" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" stylesheets="@loginDesign.css" />
                   <PasswordField fx:id="admin_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <Button fx:id="admin_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
+                  <Button fx:id="admin_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
                   <Hyperlink fx:id="admin_hyperlink" layoutX="117.0" layoutY="496.0" onAction="#switchForm" stylesheets="@loginDesign.css" text="Login Employee Account?">
                      <font>
                         <Font size="14.0" />
@@ -49,7 +49,7 @@
                   </Label>
                   <TextField fx:id="employee_ID" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Epmloyee ID" styleClass="text-field" stylesheets="@loginDesign.css" />
                   <PasswordField fx:id="employee_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@loginDesign.css" />
-                  <Button fx:id="employee_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
+                  <Button fx:id="employee_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@loginDesign.css" text="Login" />
                   <Hyperlink fx:id="employee_hyperLink" layoutX="125.0" layoutY="498.0" onAction="#switchForm" stylesheets="@loginDesign.css" text="Login Admin Account">
                      <font>
                         <Font size="14.0" />
