@@ -1,58 +1,59 @@
 package org.example.denemeson;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductStorage {
+    private static final String FILE_PATH = "C:/Users/emirh/OneDrive/Masaüstü/DenemeSon/src/main/resources/org/example/denemeso/ProductStorage.txt";
 
-    private List<Product> productList = new ArrayList<>();
-    private final String filePath = "products.json";
+    //Ürünleri dosyadan oku
+    public static List<Product> readProduct() {
+        List<Product> products = new ArrayList<>();
 
-    //ürün ekleme
-    public void addProduct(Product product) {
-        productList.add(product);
-        saveToFile();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                String name = parts[0];
+                double price = Double.parseDouble(parts[1]);
+                int stock = Integer.parseInt(parts[2]);
+                products.add(new Product(name, price, stock));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 
-    public void removeProduct(String productName) {
-        productList.removeIf(product -> product.getName().equalsIgnoreCase(productName));
-    }
-
-    //ürünleri JSON dosyasına kasydetme
-    public void saveToFile(){
-        try(FileWriter writer = new FileWriter(filePath)){
-            Gson gson = new Gson();
-            gson.toJson(productList, writer);
-        } catch (IOException e) {
+    //Ürünleri dosyaya yaz
+    public static void ürünleriDosyayaYaz(List<Product> products) {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH))){
+            for(Product product : products){
+                writer.write(product.toString());
+                writer.newLine();
+            }
+        }catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //JSON dosyasından ürünleri yükle
-    public void loadFromFile() {
-        try (FileReader reader = new FileReader(filePath)) {
-            Gson gson = new Gson();
-            Type productListType = new TypeToken<List<Product>>() {
-            }.getType();
-            productList = gson.fromJson(reader, productListType);
-            if (productList == null) {
-                productList = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            // dosya yoksa yeni liste başlat
-            productList = new ArrayList<>();
+    //Yeni Ürün ekle
+    public static void ürünEkle(Product product) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+            writer.write(product.toString());
+            writer.newLine();
+        }catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
 
-    public List<Product> getProductList(){
-        return productList;
-    }
+
+
 }
+
+

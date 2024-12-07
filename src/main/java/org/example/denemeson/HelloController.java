@@ -1,10 +1,14 @@
 package org.example.denemeson;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
+import javafx.stage.Stage;
 
 public class HelloController {
     @FXML
@@ -44,6 +48,7 @@ public class HelloController {
         System.exit(0);
     }
 
+    //Admin ve Employee girişleri arasında geçiş yapılıyor
     public void switchForm(ActionEvent event){
         if(event.getSource() == admin_hyperlink){
             admin_form.setVisible(false);
@@ -53,6 +58,77 @@ public class HelloController {
             employee_form.setVisible(false);
         }
     }
+
+    private Alert alert;
+    LoginManager loginManager = new LoginManager();
+
+    //Admin girişi kontrol yapılıyor
+    public void adminLogin(ActionEvent event) {
+        try {
+            if (event.getSource() == admin_login) {
+                if (loginManager.adminDoğrulama(admin_username.getText(), admin_password.getText())) {
+                    alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Kullanıcı girişi başarılı");
+                    alert.showAndWait();
+
+                    admin_login.getScene().getWindow().hide();
+
+                    Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/adminEkrani.fxml"));
+
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Kullanıcı girişi başarısız");
+                    alert.showAndWait();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    //Employee girişi kontrol ediliyor
+    public void employeeLogin(ActionEvent event) {
+        try {
+            if (event.getSource() == employee_login) {
+                if (loginManager.adminDoğrulama(employee_ID.getText(), employee_password.getText())) {
+                    alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Kullanıcı girişi başarılı");
+                    alert.showAndWait();
+
+                    admin_login.getScene().getWindow().hide();
+
+                    Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/employeeEkrani.fxml"));
+
+                    Stage stage = new Stage();
+                    Scene scene = new Scene(root);
+
+                    stage.setScene(scene);
+                    stage.show();
+                } else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Kullanıcı girişi başarısız");
+                    alert.showAndWait();
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 
