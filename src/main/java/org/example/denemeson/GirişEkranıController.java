@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-public class HelloController {
+public class GirişEkranıController {
     @FXML
     private AnchorPane admin_form;
 

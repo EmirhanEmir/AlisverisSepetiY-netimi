@@ -10,14 +10,14 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-public class HelloApplication extends Application {
+public class UygulamaBaşlat extends Application {
 
     private double x = 0;
     private double y = 0;
 
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/hello-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/girişEkranı.fxml"));
         Scene scene = new Scene(root);
 
         root.setOnMousePressed((MouseEvent event) ->{
