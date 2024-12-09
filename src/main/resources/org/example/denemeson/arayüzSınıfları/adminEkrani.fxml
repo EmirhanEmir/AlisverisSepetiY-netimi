@@ -18,7 +18,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.denemeson.AdminEkranıController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="adminMain_Form" prefHeight="200.0" prefWidth="200.0">
          <children>
             <BorderPane layoutX="383.0" layoutY="206.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
@@ -27,7 +27,7 @@
                         <AnchorPane layoutX="-5.6" layoutY="-77.0" prefHeight="34.0" prefWidth="1106.0" styleClass="top-form" stylesheets="@../adminArayuzu.css" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Button fx:id="çıkışBTN" layoutX="1041.0" layoutY="2.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../adminArayuzu.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
-                              <Button fx:id="pencereyiKapatBTN" layoutX="1008.0" layoutY="1.0" mnemonicParsing="false" styleClass="minimize" stylesheets="@../adminArayuzu.css" text="Aşağı" AnchorPane.topAnchor="2.0" />
+                              <Button fx:id="pencereyiKapatBTN" layoutX="1008.0" layoutY="1.0" mnemonicParsing="false" onAction="#aşağıAl" styleClass="minimize" stylesheets="@../adminArayuzu.css" text="Aşağı" AnchorPane.topAnchor="2.0" />
                               <Label layoutX="37.0" layoutY="7.0" text="Super Market Admin Portal">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
@@ -47,10 +47,9 @@
                            </font>
                         </Label>
                         <Line endX="100.0" layoutX="98.0" layoutY="194.0" startX="-100.0" stroke="WHITE" />
-                        <Button layoutX="10.0" layoutY="241.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../adminArayuzu.css" text="DashBoard" />
-                        <Button layoutX="8.0" layoutY="276.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../adminArayuzu.css" text="Add Product" />
-                        <Button layoutX="8.0" layoutY="311.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../adminArayuzu.css" text="Employees" />
-                        <Button fx:id="geriÇıkış" layoutX="14.0" layoutY="514.0" mnemonicParsing="false" stylesheets="@../adminArayuzu.css" text="Geri">
+                        <Button fx:id="adminArayüzü_solPencere_dashboard" layoutX="10.0" layoutY="241.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../adminArayuzu.css" text="DashBoard" />
+                        <Button fx:id="adminArayüzü_solPencere_ürünEkle" layoutX="8.0" layoutY="276.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="35.0" prefWidth="180.0" styleClass="nav-btn" stylesheets="@../adminArayuzu.css" text="Add Product" />
+                        <Button fx:id="geriÇıkış" layoutX="14.0" layoutY="514.0" mnemonicParsing="false" onAction="#logout" stylesheets="@../adminArayuzu.css" text="Geri">
                            <font>
                               <Font name="Tahoma Bold" size="11.0" />
                            </font>
@@ -65,7 +64,7 @@
                <center>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="326.0" layoutY="115.0" prefHeight="553.6" prefWidth="900.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="istatistikEkranı" layoutX="326.0" layoutY="115.0" prefHeight="553.6" prefWidth="900.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="13.0" layoutY="13.0" prefHeight="526.0" prefWidth="874.0" stylesheets="@../adminArayuzu.css">
                                  <styleClass>
@@ -85,18 +84,18 @@
                                        </children>
                                     </AnchorPane>
                                     <AreaChart layoutX="58.0" layoutY="188.0" prefHeight="303.0" prefWidth="750.0">
-                                      <xAxis>
-                                        <CategoryAxis side="BOTTOM" />
-                                      </xAxis>
-                                      <yAxis>
-                                        <NumberAxis side="LEFT" />
-                                      </yAxis>
+                                       <xAxis>
+                                          <CategoryAxis side="BOTTOM" />
+                                       </xAxis>
+                                       <yAxis>
+                                          <NumberAxis side="LEFT" />
+                                       </yAxis>
                                     </AreaChart>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="productEkleme_form" layoutX="294.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="productEkleme_form" layoutX="294.0" layoutY="58.0" prefHeight="553.6" prefWidth="900.8" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="9.0" prefHeight="534.0" prefWidth="237.0" stylesheets="@../adminArayuzu.css">
                                  <styleClass>
@@ -140,7 +139,7 @@
                                     <TextField fx:id="productEkleme_price" layoutX="109.0" layoutY="198.0" prefHeight="26.0" prefWidth="126.0" styleClass="textfield" stylesheets="@../adminArayuzu.css" AnchorPane.rightAnchor="7.199999" />
                                  </children>
                               </AnchorPane>
-                              <AnchorPane layoutX="263.0" prefHeight="534.0" prefWidth="623.0" stylesheets="@../adminArayuzu.css">
+                              <AnchorPane layoutX="263.0" layoutY="9.0" prefHeight="534.0" prefWidth="623.0" stylesheets="@../adminArayuzu.css">
                                  <styleClass>
                                     <String fx:value="white-bg" />
                                     <String fx:value="shadow" />
@@ -152,13 +151,13 @@
                                        </font>
                                     </TextField>
                                     <TableView fx:id="productEkleme_Tablo" layoutX="18.0" layoutY="56.0" prefHeight="466.0" prefWidth="590.0" stylesheets="@../adminArayuzu.css">
-                                      <columns>
-                                        <TableColumn fx:id="productEkleme_tablo_productID" prefWidth="110.40005493164062" text="Product ID" />
-                                        <TableColumn fx:id="productEkleme_tablo_brandName" prefWidth="151.20001220703125" text="Brand Name" />
+                                       <columns>
+                                          <TableColumn fx:id="productEkleme_tablo_productID" prefWidth="110.40005493164062" text="Product ID" />
+                                          <TableColumn fx:id="productEkleme_tablo_brandName" prefWidth="151.20001220703125" text="Brand Name" />
                                           <TableColumn fx:id="productEkleme_tablo_productName" prefWidth="166.4000244140625" text="Product Name" />
                                           <TableColumn fx:id="productEkleme_tablo_status" prefWidth="86.4000244140625" text="Status" />
                                           <TableColumn fx:id="productEkleme_tablo_price" prefWidth="72.7999267578125" text="Price" />
-                                      </columns>
+                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>

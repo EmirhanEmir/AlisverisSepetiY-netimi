@@ -5,10 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class GirişEkranıController {
     @FXML
@@ -48,6 +50,11 @@ public class GirişEkranıController {
         System.exit(0);
     }
 
+
+    private double x = 0;
+    private double y = 0;
+
+
     //Admin ve Employee girişleri arasında geçiş yapılıyor
     public void switchForm(ActionEvent event){
         if(event.getSource() == admin_hyperlink){
@@ -79,6 +86,18 @@ public class GirişEkranıController {
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+
+                    root.setOnMousePressed((MouseEvent event1) ->{
+                        x = event1.getSceneX();
+                        y = event1.getSceneY();
+                    });
+
+                    root.setOnMouseDragged((MouseEvent event1) ->{
+                        stage.setX(event1.getScreenX() - x);
+                        stage.setY(event1.getScreenY() - y);
+                    });
+
+                    stage.initStyle(StageStyle.TRANSPARENT);
 
                     stage.setScene(scene);
                     stage.show();
