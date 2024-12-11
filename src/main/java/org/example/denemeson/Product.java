@@ -5,11 +5,15 @@ public class Product {
     private String name;
     private double price;
     private int stock;
+    private int id;
+    private String durum;
 
-    public Product(String name, double price, int stock) {
+    public Product( int id, String name, double price, int stock, String durum) {
         this.name = name;
         this.price = price;
         this.stock = stock;
+        this.id = id;
+        this.durum = durum;
     }
 
 
@@ -35,5 +39,21 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDurum() {
+        return durum;
+    }
+
+    public void setDurum(String durum) {
+        this.durum = durum;
     }
 }

@@ -102,6 +102,19 @@
     -fx-background-color: #67df4f;
 }
 
+.güncelleBtn{
+    -fx-background-color: #c59706;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+
+.güncelleBtn:hover{
+    -fx-background-color: #ffc500;
+}
+
 .silBtn{
     -fx-background-color: #cf2828;
     -fx-background-radius: 8px;

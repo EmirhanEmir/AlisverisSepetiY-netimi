@@ -1,11 +1,14 @@
 package org.example.denemeson;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,19 +17,36 @@ import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminEkranıController implements Initializable {
 
     @FXML
+    private Button adminArayüzü_solPencere_dashboard;
+
+    @FXML
+    private Button adminArayüzü_solPencere_ürünEkle;
+
+    @FXML
     private AnchorPane adminMain_Form;
 
     @FXML
-    private TableView<?> productEkleme_Tablo;
+    private Button geriÇıkış;
 
     @FXML
-    private TextField productEkleme_brandName;
+    private Label adminAdi;
+
+    @FXML
+    private AnchorPane istatistikEkranı;
+
+    @FXML
+    private Button pencereyiKapatBTN;
+
+    @FXML
+    private TableView<Product> productEkleme_Tablo;
 
     @FXML
     private Button productEkleme_ekleBTN;
@@ -50,51 +70,118 @@ public class AdminEkranıController implements Initializable {
     private Button productEkleme_silBTN;
 
     @FXML
-    private ComboBox<?> productEkleme_status;
+    private ComboBox<?> productEkleme_durum;
 
     @FXML
-    private TableColumn<?, ?> productEkleme_tablo_brandName;
+    private TextField productEkleme_stok;
 
     @FXML
-    private TableColumn<?, ?> productEkleme_tablo_price;
+    private TableColumn<Product, String> productEkleme_tablo_durum;
 
     @FXML
-    private TableColumn<?, ?> productEkleme_tablo_productID;
+    private TableColumn<Product, String> productEkleme_tablo_fiyat;
 
     @FXML
-    private TableColumn<?, ?> productEkleme_tablo_productName;
+    private TableColumn<Product, String> productEkleme_tablo_productID;
 
     @FXML
-    private TableColumn<?, ?> productEkleme_tablo_status;
+    private TableColumn<Product, String> productEkleme_tablo_productName;
 
     @FXML
-    private Button productEkleme_temizleBTN;
+    private TableColumn<Product, String> productEkleme_tablo_stok;
+
+    @FXML
+    private Button productEkleme_güncelleBTN;
 
     @FXML
     private Button productEkleme_yenileBTN;
 
     @FXML
-    private Button geriÇıkış;
-
-    @FXML
-    private Button pencereyiKapatBTN;
-
-    @FXML
     private Button çıkışBTN;
-
-    @FXML
-    private Button adminArayüzü_solPencere_ürünEkle;
-
-    @FXML
-    private AnchorPane istatistikEkranı;
-
-    @FXML
-    private Button adminArayüzü_solPencere_dashboard;
-
     private double x = 0;
     private double y = 0;
 
-    public void logout(){
+    private String[] durumListe = {"Satışta","Satıştan Kaldırıldı"};
+    public void urunDurumBelirleme(){
+        List<String> lists = new ArrayList<>();
+
+        for(String durumlar:durumListe){
+            lists.add(durumlar);
+        }
+        ObservableList durumlarVeri = FXCollections.observableList(lists);
+        productEkleme_durum.setItems(durumlarVeri);
+
+    }
+
+    public void urunEklemeBTN(ActionEvent event) {
+        try {
+            if (event.getSource() == productEkleme_ekleBTN) {
+                tabloyaUrunEkleme();
+                textleriTemizle();
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();}
+    }
+
+    public void tabloyaUrunEkleme(){
+        try {
+            Alert alert;
+            //ürün ekleme verilerinin eksik olup olmadığını kontrol ediyoruz
+            if (productEkleme_productID.getText().isEmpty() || productEkleme_productName.getText().isEmpty() || productEkleme_stok.getText().isEmpty() || productEkleme_price.getText().isEmpty() || productEkleme_durum.getSelectionModel().getSelectedItem()==null) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Lütfen Tüm Alanları Doldurduğunuzdan Emin Olunuz");
+                alert.showAndWait();
+            }else{
+                if (idKontrol(Integer.parseInt(productEkleme_productID.getText()))){
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Seçilen ID önceden kayıtlı");
+                    alert.showAndWait();
+                }else{
+                    agacaUrunEkleme(Integer.parseInt(productEkleme_productID.getText()),productEkleme_productName.getText(),Double.parseDouble(productEkleme_price.getText()),Integer.parseInt(productEkleme_stok.getText()),(String)productEkleme_durum.getSelectionModel().getSelectedItem());
+                    ağacıDolaşma(veri.root, productList,0);
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Ürün Başarıyla Kaydedildi");
+                    alert.showAndWait();
+
+                    tablodaGörüntüleme();
+                }
+
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void adminAdıYazdirma(){
+        adminAdi.setText(kullaniciAdiVerme.admin);
+    }
+
+    public boolean idKontrol(int id){
+
+        UrunKutusu işaretci = veri.root;
+        while(işaretci!=null){
+            if(işaretci.product.getId()==id){
+                return true;
+            }
+            if(işaretci.product.getId()>id){
+                işaretci = işaretci.sol;
+            }else{
+                işaretci = işaretci.sağ;
+            }
+        }
+        return false;
+    }
+
+    public void geriÇıkış(){
         try{
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -145,27 +232,116 @@ public class AdminEkranıController implements Initializable {
         stage.setIconified(true);
     }
 
-    @FXML
-    public void switchForm(ActionEvent event){
-        if(event.getSource() == adminArayüzü_solPencere_ürünEkle){
-            istatistikEkranı.setVisible(false);
-            productEkleme_form.setVisible(true);
 
-            adminArayüzü_solPencere_ürünEkle.setStyle("-fx-background-color:linear-gradient(to top right,#4336d7,#bab8d4)");
-            adminArayüzü_solPencere_dashboard.setStyle("-fx-background-color:Transparent");
+    public void tablodaGörüntüleme(){
+        productEkleme_tablo_productID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productEkleme_tablo_stok.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productEkleme_tablo_productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productEkleme_tablo_durum.setCellValueFactory(new PropertyValueFactory<>("durum"));
+        productEkleme_tablo_fiyat.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        productEkleme_Tablo.setItems(productList);
+    }
+
+    VeriIşlemleri veri = new VeriIşlemleri();
+
+    public void agacaUrunEkleme(int id , String name, double price, int stock, String durum){
+        veri.root = veri.urunEkle(veri.root,id,name,price,stock,durum);
+    }
 
 
-        }else if(event.getSource() == adminArayüzü_solPencere_dashboard){
-            istatistikEkranı.setVisible(true);
-            productEkleme_form.setVisible(false);
+    ObservableList<Product> productList = FXCollections.observableArrayList();
 
-            adminArayüzü_solPencere_dashboard.setStyle("-fx-background-color:linear-gradient(to top right,#4336d7,#bab8d4)");
-            adminArayüzü_solPencere_ürünEkle.setStyle("-fx-background-color:Transparent");
+
+    public void ağacıDolaşma(UrunKutusu node, ObservableList<Product> productList,int i){
+        if (i == 0){
+            productList.clear();
         }
+        if (node != null) {
+            ağacıDolaşma(node.sol, productList,i++);
+            productList.add(node.product);
+            ağacıDolaşma(node.sağ, productList,i++);
+        }
+    }
+
+    public void tablodanUrunSeçme(){
+        Product prod = productEkleme_Tablo.getSelectionModel().getSelectedItem();
+        int num = productEkleme_Tablo.getSelectionModel().getSelectedIndex();
+        if((num-1) < -1){
+            return;
+        }
+
+        productEkleme_productID.setText(String.valueOf(prod.getId()));
+        productEkleme_productID.setEditable(false);
+        productEkleme_stok.setText(String.valueOf(prod.getStock()));
+        productEkleme_productName.setText(prod.getName());
+        productEkleme_price.setText(String.valueOf(prod.getPrice()));
+    }
+
+    public void urunGüncellemeBTN(){
+        try {
+            Alert alert;
+            //ürün güncellemenin verilerinin eksik olup olmadığını kontrol ediyoruz
+            if (productEkleme_productID.getText().isEmpty() || productEkleme_productName.getText().isEmpty() || productEkleme_stok.getText().isEmpty() || productEkleme_price.getText().isEmpty() || productEkleme_durum.getSelectionModel().getSelectedItem()==null) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Lütfen Tüm Alanları Doldurduğunuzdan Emin Olunuz");
+                alert.showAndWait();
+            }else{
+
+                UrunKutusu işaretci = veri.root;
+                while(işaretci!=null){
+                    if(işaretci.product.getId()==Integer.parseInt(productEkleme_productID.getText())){
+                        break;
+                    }
+
+                    if(işaretci.product.getId()>Integer.parseInt(productEkleme_productID.getText())){
+                        işaretci = işaretci.sol;
+                    }else{
+                        işaretci = işaretci.sağ;
+                    }
+                }
+
+
+
+
+                    işaretci.product.setStock(Integer.parseInt(productEkleme_stok.getText()));
+                    işaretci.product.setPrice(Double.parseDouble(productEkleme_price.getText()));
+                    işaretci.product.setName(productEkleme_productName.getText());
+                    işaretci.product.setDurum((String)productEkleme_durum.getSelectionModel().getSelectedItem());
+
+                    alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Ürün Başarıyla güncellendi");
+                    alert.showAndWait();
+
+                    ağacıDolaşma(veri.root,productList,0);
+                    tablodaGörüntüleme();
+
+
+
+                }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void textleriTemizle() {
+        productEkleme_productID.clear();
+        productEkleme_productName.clear();
+        productEkleme_price.clear();
+        productEkleme_stok.clear();
+        productEkleme_durum.setValue(null);;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        tablodaGörüntüleme();
+        urunDurumBelirleme();
+        adminAdıYazdirma();
+        
     }
 }

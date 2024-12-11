@@ -80,6 +80,8 @@ public class GirişEkranıController {
                     alert.setContentText("Kullanıcı girişi başarılı");
                     alert.showAndWait();
 
+                    kullaniciAdiVerme.admin = admin_username.getText();
+
                     admin_login.getScene().getWindow().hide();
 
                     Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/adminEkrani.fxml"));
