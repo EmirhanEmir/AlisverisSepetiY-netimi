@@ -40,6 +40,9 @@ public class AdminEkranıController implements Initializable {
     private Label adminAdi;
 
     @FXML
+    private Button kaydetBtn;
+
+    @FXML
     private AnchorPane istatistikEkranı;
 
     @FXML
@@ -70,7 +73,7 @@ public class AdminEkranıController implements Initializable {
     private Button productEkleme_silBTN;
 
     @FXML
-    private ComboBox<?> productEkleme_durum;
+    private ComboBox<String> productEkleme_durum;
 
     @FXML
     private TextField productEkleme_stok;
@@ -94,14 +97,33 @@ public class AdminEkranıController implements Initializable {
     private Button productEkleme_güncelleBTN;
 
     @FXML
-    private Button productEkleme_yenileBTN;
+    private Button ürünlerBTN;
 
     @FXML
     private Button çıkışBTN;
+
     private double x = 0;
     private double y = 0;
 
+    public static VeriIşlemleri veri = new VeriIşlemleri();
+
+    ProductStorage yazmaOkuma = new ProductStorage();
+
     private String[] durumListe = {"Satışta","Satıştan Kaldırıldı"};
+
+    public void ürünlerBTN(){
+//        ProductStorage.urunOkuma();
+//        ağacıDolaşma(veri.root, productList,0);
+
+        if(productEkleme_Tablo.isVisible()){
+            productEkleme_Tablo.setVisible(false);
+        }else{
+            productEkleme_Tablo.setVisible(true);
+        }
+
+
+    }
+
     public void urunDurumBelirleme(){
         List<String> lists = new ArrayList<>();
 
@@ -118,10 +140,65 @@ public class AdminEkranıController implements Initializable {
             if (event.getSource() == productEkleme_ekleBTN) {
                 tabloyaUrunEkleme();
                 textleriTemizle();
+                değişiklik = true;
 
             }
         }catch (Exception e){
             e.printStackTrace();}
+    }
+
+    private boolean değişiklik = false;
+    public void kaydetBtn() {
+        if(değişiklik){
+            yazmaOkuma.yazmaIslemiCalistir(veri.root);
+            Alert alert;
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Ürün Başarıyla Kaydedildi");
+            alert.showAndWait();
+            değişiklik = false;
+        }else{
+            Alert alert;
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Herhangi bir değişiklik yapılmadı");
+            alert.showAndWait();
+        }
+
+    }
+
+    public void urunSilBtn(){
+        try {
+            Alert alert;
+            //ürün silme verilerinin eksik olup olmadığını kontrol ediyoruz
+            if (productEkleme_productID.getText().isEmpty() || productEkleme_productName.getText().isEmpty() || productEkleme_stok.getText().isEmpty() || productEkleme_price.getText().isEmpty() || productEkleme_durum.getSelectionModel().getSelectedItem()==null) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Silinecek Ürünün Bilgileri Eksik ");
+                alert.showAndWait();
+            }else{
+                veri.root = veri.urunSil(veri.root,Integer.parseInt(productEkleme_productID.getText()));
+
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Ürün Başarıyla silindi");
+                alert.showAndWait();
+
+                ağacıDolaşma(veri.root,productList,0);
+                tablodaGörüntüleme();
+                değişiklik = true;
+
+
+
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void tabloyaUrunEkleme(){
@@ -243,17 +320,15 @@ public class AdminEkranıController implements Initializable {
         productEkleme_Tablo.setItems(productList);
     }
 
-    VeriIşlemleri veri = new VeriIşlemleri();
-
     public void agacaUrunEkleme(int id , String name, double price, int stock, String durum){
         veri.root = veri.urunEkle(veri.root,id,name,price,stock,durum);
     }
 
 
-    ObservableList<Product> productList = FXCollections.observableArrayList();
+    static ObservableList<Product> productList = FXCollections.observableArrayList();
 
 
-    public void ağacıDolaşma(UrunKutusu node, ObservableList<Product> productList,int i){
+    static public void ağacıDolaşma(UrunKutusu node, ObservableList<Product> productList,int i){
         if (i == 0){
             productList.clear();
         }
@@ -275,6 +350,7 @@ public class AdminEkranıController implements Initializable {
         productEkleme_productID.setEditable(false);
         productEkleme_stok.setText(String.valueOf(prod.getStock()));
         productEkleme_productName.setText(prod.getName());
+        productEkleme_durum.setValue(prod.getDurum());
         productEkleme_price.setText(String.valueOf(prod.getPrice()));
     }
 
@@ -319,6 +395,7 @@ public class AdminEkranıController implements Initializable {
 
                     ağacıDolaşma(veri.root,productList,0);
                     tablodaGörüntüleme();
+                    değişiklik = true;
 
 
 
@@ -342,6 +419,7 @@ public class AdminEkranıController implements Initializable {
         tablodaGörüntüleme();
         urunDurumBelirleme();
         adminAdıYazdirma();
+
         
     }
 }

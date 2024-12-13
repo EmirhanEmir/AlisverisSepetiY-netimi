@@ -1,5 +1,7 @@
 package org.example.denemeson;
 
+import javafx.collections.ObservableList;
+
 public class VeriIşlemleri {
     UrunKutusu root;
 
@@ -107,6 +109,14 @@ public class VeriIşlemleri {
         }}
 
 
+    public void ağacıDolaşma(UrunKutusu node){
+
+        if (node != null) {
+            ağacıDolaşma(node.sol);
+            System.out.println(node.product.getId());
+            ağacıDolaşma(node.sağ);
+        }
+    }
 
 
 

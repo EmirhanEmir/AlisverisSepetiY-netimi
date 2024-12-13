@@ -80,6 +80,9 @@ public class GirişEkranıController {
                     alert.setContentText("Kullanıcı girişi başarılı");
                     alert.showAndWait();
 
+                    ProductStorage.urunOkuma();
+                    AdminEkranıController.ağacıDolaşma(AdminEkranıController.veri.root, AdminEkranıController.productList,0);
+
                     kullaniciAdiVerme.admin = admin_username.getText();
 
                     admin_login.getScene().getWindow().hide();
@@ -127,12 +130,25 @@ public class GirişEkranıController {
                     alert.setContentText("Kullanıcı girişi başarılı");
                     alert.showAndWait();
 
+                    ProductStorage.urunOkuma();
+                    AdminEkranıController.ağacıDolaşma(AdminEkranıController.veri.root, AdminEkranıController.productList,0);
+
                     admin_login.getScene().getWindow().hide();
 
                     Parent root = FXMLLoader.load(getClass().getResource("arayüzSınıfları/employeeEkrani.fxml"));
 
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
+
+                    root.setOnMousePressed((MouseEvent event1) ->{
+                        x = event1.getSceneX();
+                        y = event1.getSceneY();
+                    });
+
+                    root.setOnMouseDragged((MouseEvent event1) ->{
+                        stage.setX(event1.getScreenX() - x);
+                        stage.setY(event1.getScreenY() - y);
+                    });
 
                     stage.setScene(scene);
                     stage.show();

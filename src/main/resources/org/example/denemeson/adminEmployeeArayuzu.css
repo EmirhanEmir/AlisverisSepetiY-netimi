@@ -41,6 +41,15 @@
     -fx-alignment: CENTER-LEFT;
 }
 
+.nav-btn-default{
+    -fx-background-color:linear-gradient(to top right,#1baea7,#223da3);
+    -fx-cursor: hand;
+    -fx-font-family: arial;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-alignment: CENTER-LEFT;
+}
+
 .logout-btn{
     -fx-background-color: #6b6abc;
     -fx-background-radius: 8px;
@@ -169,3 +178,28 @@
     -fx-text-fill: #fff;
 }
 
+.fatura-Btn{
+    -fx-background-color: #0f3368;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+
+.fatura-Btn:hover{
+    -fx-background-color: #54b0f7;
+}
+
+.odeme-Btn{
+    -fx-background-color: #084011;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+
+.odeme-Btn:hover{
+    -fx-background-color: #0b7c1e;
+}
