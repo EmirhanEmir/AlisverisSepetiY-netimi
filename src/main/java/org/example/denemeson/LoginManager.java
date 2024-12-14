@@ -14,7 +14,7 @@ public class LoginManager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length == 2) {
+                if(parts.length == 3) {
                     String storedUsername = parts[0];
                     String storedPassword = parts[1];
                     if (storedUsername.equals(username) && storedPassword.equals(password)) {
@@ -34,7 +34,7 @@ public class LoginManager {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length == 2) {
+                if(parts.length == 3) {
                     String storedUsername = parts[0];
                     String storedPassword = parts[1];
                     if (storedUsername.equals(username) && storedPassword.equals(password)) {
@@ -50,14 +50,14 @@ public class LoginManager {
 
 
     //admin Ekleme methodu
-    public static void adminKullanıcıEkle(String username, String password) {
-        try (FileWriter writer = new FileWriter(EMPLOYEE_FILE_PATH, true)) {// true dosya ekleme modu
-            BufferedReader reader = new BufferedReader(new FileReader(EMPLOYEE_FILE_PATH));
+    public static boolean adminKullanıcıEkle(String username, String password ,String renk) {
+        try (FileWriter writer = new FileWriter(ADMIN_FILE_PATH, true)) {// true dosya ekleme modu
+            BufferedReader reader = new BufferedReader(new FileReader(ADMIN_FILE_PATH));
             String line;
             boolean varmı = false;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length == 2) {
+                if(parts.length == 3) {
                     String storedUsername = parts[0];
                     String storedPassword = parts[1];
                     if (storedUsername.equals(username)) {
@@ -68,26 +68,25 @@ public class LoginManager {
                     }
                 }
             }
-            if(varmı){
-                System.out.println("kullanıcı aktif");
-            }else{
-                writer.write(username +","+password+"\n");
-                System.out.println("ekleme yapıldı");
+            if(!varmı) {
+                writer.write(username + "," + password + "," + renk + "\n");
+                return true;
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     //Epmloyee Ekleme MEthodu
-    public static void employeeKullanıcıEkle(String username, String password) {
+    public static boolean employeeKullanıcıEkle(String username, String password ,String renk) {
         try (FileWriter writer = new FileWriter(EMPLOYEE_FILE_PATH, true)) {// true dosya ekleme modu
             BufferedReader reader = new BufferedReader(new FileReader(EMPLOYEE_FILE_PATH));
             String line;
             boolean varmı = false;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                if(parts.length == 2) {
+                if(parts.length == 3) {
                     String storedUsername = parts[0];
                     String storedPassword = parts[1];
                     if (storedUsername.equals(username)) {
@@ -98,14 +97,14 @@ public class LoginManager {
                     }
                 }
             }
-            if(varmı){
-                System.out.println("kullanıcı aktif");
-            }else{
-                writer.write(username +","+password+"\n");
-                System.out.println("ekleme yapıldı");
+            if(!varmı){
+                writer.write(username +","+password+","+renk+"\n");
+                return true;
+
             }
         }catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 }

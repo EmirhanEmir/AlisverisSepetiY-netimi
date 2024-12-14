@@ -58,7 +58,17 @@
     -fx-text-fill: #000
 }
 
+.HesapOluşturma-btn{
+    -fx-background-color: linear-gradient(to bottom, #72727a, #d3d4dd);
+    -fx-background-radius: 8px;
+    -fx-text-fill: #fff;
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+}
 
+.HesapOluşturma-btn:hover{
+    -fx-background-color: #72727a ,#d3d4dd;
+}
 
 
 

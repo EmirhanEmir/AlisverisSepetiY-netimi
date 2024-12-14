@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -9,30 +10,42 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="779.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.denemeson.GirişEkranıController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.denemeson.GirişEkranıController">
    <children>
-      <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane fx:id="main_form" prefHeight="563.0" prefWidth="800.0">
          <children>
-            <AnchorPane layoutX="-2.0" layoutY="171.0" prefHeight="563.0" prefWidth="390.0" styleClass="left-form" stylesheets="@../girisArayuzu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="KayanEkran" prefHeight="563.0" prefWidth="400.0" styleClass="left-form" stylesheets="@../girisArayuzu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="141.0" layoutY="268.0" text="Super Market" textFill="WHITE">
+                  <Label layoutX="89.0" layoutY="90.0" text="Super Market" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="HesapOluşturmaBTN" layoutX="95.0" layoutY="491.0" mnemonicParsing="false" onAction="#ekranKayması" prefHeight="30.0" prefWidth="200.0" styleClass="HesapOluşturma-btn" stylesheets="@../girisArayuzu.css" text="Oluştur" />
+                  <Label fx:id="HesapOluşturmaMTN" layoutX="111.0" layoutY="451.0" text="Hesap Oluşturma" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="hesabaGirişYapBTN" layoutX="95.0" layoutY="491.0" mnemonicParsing="false" onAction="#ekranKayması" prefHeight="30.0" prefWidth="200.0" styleClass="HesapOluşturma-btn" stylesheets="@../girisArayuzu.css" text="Giriş" visible="false" />
+                  <Label fx:id="HesabaGirişYapMTN" layoutX="113.0" layoutY="451.0" text="Hesaba Giriş Yap" textFill="WHITE" visible="false">
+                     <font>
+                        <Font size="22.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="admin_form" layoutX="382.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="admin_form" layoutX="400.0" prefHeight="563.0" prefWidth="400.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="133.0" layoutY="173.0" stylesheets="@../girisArayuzu.css" text="Admin Sign In" textFill="#060c63">
+                  <Label layoutX="141.0" layoutY="175.0" stylesheets="@../girisArayuzu.css" text="Admin Girişi" textFill="#060c63">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="admin_username" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
-                  <PasswordField fx:id="admin_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
-                  <Button fx:id="admin_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Login" />
-                  <Hyperlink fx:id="admin_hyperlink" layoutX="117.0" layoutY="496.0" onAction="#switchForm" stylesheets="@../girisArayuzu.css" text="Login Employee Account?">
+                  <TextField fx:id="admin_username" layoutX="92.0" layoutY="270.0" prefHeight="30.0" prefWidth="220.0" promptText="Admin Adı" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <PasswordField fx:id="admin_password" layoutX="92.0" layoutY="320.0" prefHeight="30.0" prefWidth="220.0" promptText="Şifre" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <Button fx:id="admin_login" layoutX="145.0" layoutY="370.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Giriş" />
+                  <Hyperlink fx:id="admin_hyperlink" layoutX="118.0" layoutY="496.0" onAction="#girişDeğiştirme" stylesheets="@../girisArayuzu.css" text="Kullanıcı Hesabı Girişi mi?">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -40,22 +53,50 @@
                   <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../girisArayuzu.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="employee_form" layoutX="399.0" layoutY="10.0" prefHeight="563.0" prefWidth="390.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="employee_form" layoutX="400.0" layoutY="3.0" prefHeight="563.0" prefWidth="400.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="119.0" layoutY="173.0" stylesheets="@../girisArayuzu.css" text="Employee Sign In" textFill="#060c63">
+                  <Label layoutX="133.0" layoutY="171.0" stylesheets="@../girisArayuzu.css" text="Kullanıcı Girişi" textFill="#060c63">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="employee_ID" layoutX="92.0" layoutY="268.0" prefHeight="30.0" prefWidth="220.0" promptText="Epmloyee ID" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
-                  <PasswordField fx:id="employee_password" layoutX="92.0" layoutY="313.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
-                  <Button fx:id="employee_login" layoutX="145.0" layoutY="369.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Login" />
-                  <Hyperlink fx:id="employee_hyperLink" layoutX="125.0" layoutY="498.0" onAction="#switchForm" stylesheets="@../girisArayuzu.css" text="Login Admin Account">
+                  <TextField fx:id="employee_ID" layoutX="92.0" layoutY="270.0" prefHeight="30.0" prefWidth="220.0" promptText="Kullanıcı Adı" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <PasswordField fx:id="employee_password" layoutX="92.0" layoutY="320.0" prefHeight="30.0" prefWidth="220.0" promptText="Şifre" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <Button fx:id="employee_login" layoutX="145.0" layoutY="370.0" mnemonicParsing="false" onAction="#employeeLogin" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Giriş" />
+                  <Hyperlink fx:id="employee_hyperLink" layoutX="124.0" layoutY="496.0" onAction="#girişDeğiştirme" stylesheets="@../girisArayuzu.css" text="Admin Hesabı Girişi mi?">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Hyperlink>
                   <Button layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../girisArayuzu.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="KullanıcıHesabıOluşturma" prefHeight="563.0" prefWidth="400.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="KullanıcıOlşturma_kullanıcıAdı" layoutX="77.0" layoutY="171.0" stylesheets="@../girisArayuzu.css" text="Kullanıcı Hesabı Oluşturma" textFill="#060c63">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="kullanıcıOluşturma_Adı" layoutX="92.0" layoutY="270.0" prefHeight="30.0" prefWidth="220.0" promptText="Kullanıcı Adı" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <PasswordField fx:id="KullanıcıOlşturma_Şifre" layoutX="92.0" layoutY="370.0" prefHeight="30.0" prefWidth="220.0" promptText="Şifre" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <Button fx:id="KullanıcıOlşturma_oluşturBtn" layoutX="145.0" layoutY="468.0" mnemonicParsing="false" onAction="#KullanıcıHesabıOluşturma" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Oluştur" />
+                  <Button fx:id="KullanıcıOlşturma_çıkışBtn" layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../girisArayuzu.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <ComboBox fx:id="KullanıcıOlşturma_FavoriRenginiz" layoutX="91.0" layoutY="320.0" prefHeight="30.0" prefWidth="220.0" promptText="Favori Renginiz" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="AdminHesabıOluşturma" prefHeight="563.0" prefWidth="400.0" styleClass="right-form" stylesheets="@../girisArayuzu.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="KullanıcıOlşturma_kullanıcıAdı1" layoutX="84.0" layoutY="175.0" stylesheets="@../girisArayuzu.css" text="Admin Hesabı Oluşturma" textFill="#060c63">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="AdminOluşturma_Adı" layoutX="90.0" layoutY="266.0" prefHeight="30.0" prefWidth="220.0" promptText="Admin Adı" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <PasswordField fx:id="AdminOlşturma_Şifre" layoutX="92.0" layoutY="370.0" prefHeight="30.0" prefWidth="220.0" promptText="Şifre" styleClass="text-field" stylesheets="@../girisArayuzu.css" />
+                  <Button fx:id="AdminOlşturma_çıkışBtn" layoutX="312.0" layoutY="22.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@../girisArayuzu.css" text="Çıkış" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+                  <ComboBox fx:id="AdminOlşturma_FavoriRenginiz" layoutX="91.0" layoutY="320.0" prefHeight="30.0" prefWidth="220.0" promptText="Favori Renginiz" />
+                  <Button fx:id="AdminOlşturma_oluşturBtn" layoutX="145.0" layoutY="468.0" mnemonicParsing="false" onAction="#adminHesabıOluşturma" prefHeight="60.0" prefWidth="100.0" styleClass="login-btn" stylesheets="@../girisArayuzu.css" text="Oluştur" />
                </children>
             </AnchorPane>
          </children>
