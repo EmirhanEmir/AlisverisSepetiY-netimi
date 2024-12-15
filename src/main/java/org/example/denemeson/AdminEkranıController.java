@@ -106,34 +106,11 @@ public class AdminEkranıController implements Initializable {
 
     ProductStorage yazmaOkuma = new ProductStorage();
 
-    private String[] durumListe = {"Satışta","Satıştan Kaldırıldı"};
-
-//    public static void ürünDurumKontrolü(UrunKutusu node, ObservableList<Product> productList){
-//        if (node != null) {
-//            ürünDurumKontrolü(node.sol, productList);
-//            if(Objects.equals(node.product.getDurum(), "Satışta")){
-//                productList.add(node.product);
-//            }
-//            ürünDurumKontrolü(node.sağ, productList);
-//        }
-//    }
-//
-//    static ObservableList<Product> müşteriProducts = FXCollections.observableArrayList();
-//    public static void müşteriEkranıProductSeçme(){
-//        ürünDurumKontrolü(veri.root,müşteriProducts);
-//    }
-
-
-
+    ObservableList<String> durumlar = FXCollections.observableArrayList("Satışta","Satıştan Kaldırıldı");
 
     public void urunDurumBelirleme(){
-        List<String> lists = new ArrayList<>();
 
-        for(String durumlar:durumListe){
-            lists.add(durumlar);
-        }
-        ObservableList durumlarVeri = FXCollections.observableList(lists);
-        productEkleme_durum.setItems(durumlarVeri);
+        productEkleme_durum.setItems(durumlar);
 
     }
 
@@ -336,6 +313,9 @@ public class AdminEkranıController implements Initializable {
         }
         if (node != null) {
             ağacıDolaşma(node.sol, productList,i++);
+            if(node.product.getStock()==0){
+                node.product.setDurum("Satıştan Kaldırıldı");
+            }
             productList.add(node.product);
             ağacıDolaşma(node.sağ, productList,i++);
         }
