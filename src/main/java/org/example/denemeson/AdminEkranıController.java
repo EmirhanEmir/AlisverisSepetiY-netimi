@@ -17,10 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.stage.StageStyle;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class AdminEkranıController implements Initializable {
 
@@ -111,18 +108,23 @@ public class AdminEkranıController implements Initializable {
 
     private String[] durumListe = {"Satışta","Satıştan Kaldırıldı"};
 
-    public void ürünlerBTN(){
-//        ProductStorage.urunOkuma();
-//        ağacıDolaşma(veri.root, productList,0);
+//    public static void ürünDurumKontrolü(UrunKutusu node, ObservableList<Product> productList){
+//        if (node != null) {
+//            ürünDurumKontrolü(node.sol, productList);
+//            if(Objects.equals(node.product.getDurum(), "Satışta")){
+//                productList.add(node.product);
+//            }
+//            ürünDurumKontrolü(node.sağ, productList);
+//        }
+//    }
+//
+//    static ObservableList<Product> müşteriProducts = FXCollections.observableArrayList();
+//    public static void müşteriEkranıProductSeçme(){
+//        ürünDurumKontrolü(veri.root,müşteriProducts);
+//    }
 
-        if(productEkleme_Tablo.isVisible()){
-            productEkleme_Tablo.setVisible(false);
-        }else{
-            productEkleme_Tablo.setVisible(true);
-        }
 
 
-    }
 
     public void urunDurumBelirleme(){
         List<String> lists = new ArrayList<>();

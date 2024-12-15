@@ -203,3 +203,20 @@
 .odeme-Btn:hover{
     -fx-background-color: #0b7c1e;
 }
+
+.arayüz{
+    -fx-background-color:Transparent
+}
+
+.güncelle-Btn{
+    -fx-background-color: #c59706;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 14px;
+    -fx-font-family: Arial;
+}
+
+.güncelle-Btn-Btn:hover{
+    -fx-background-color: #f6d742;
+}

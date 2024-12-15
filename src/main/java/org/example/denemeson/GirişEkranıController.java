@@ -208,7 +208,7 @@ public class GirişEkranıController {
                     alert.showAndWait();
 
                     ProductStorage.urunOkuma();
-                    AdminEkranıController.ağacıDolaşma(AdminEkranıController.veri.root, AdminEkranıController.productList,0);
+//                    AdminEkranıController.müşteriEkranıProductSeçme();
 
                     admin_login.getScene().getWindow().hide();
 
